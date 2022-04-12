@@ -1,6 +1,6 @@
 final respostas = [
-  'r1',
-  'r2',
-  'r3',
-  'r4',
+  'Minha data de nascimento?',
+  'Nome da minha cachorra',
+  'Qual minha primeira tatuagem?',
+  'Comida preferida'
 ];

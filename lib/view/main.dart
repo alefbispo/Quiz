@@ -13,7 +13,52 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyApp extends State<MyApp> {
+  List<int> pergunta = [0, 1, 2, 3];
 
+  int perguntaEscolhida = 0;
+  int placar = 0;
+  String mostrarPlacar = 'Placar: ';
+  String fechar = 'Finalizar: ';
+
+  void _perguntasErespostas() {
+    setState(
+      () {
+        if (perguntaEscolhida < pergunta.length - 1) {
+          perguntaEscolhida++;
+          condicional();
+        }
+      },
+    );
+  }
+
+  condicional() {
+    switch (perguntaEscolhida) {
+      case 0:
+        pergunta = [0, 1, 2, 3];
+
+        break;
+      case 1:
+        pergunta = [4, 5, 6, 7];
+        break;
+      case 2:
+        pergunta = [8, 9, 10, 11];
+        break;
+      case 3:
+        pergunta = [12, 13, 14, 15];
+        break;
+    }
+  }
+
+  void _voltar() {
+    setState(() {
+      if (perguntaEscolhida <= pergunta.length) {
+        if (perguntaEscolhida > 0) {
+          perguntaEscolhida--;
+          condicional();
+        }
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,23 +73,50 @@ class _MyApp extends State<MyApp> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(perguntas[0]),
+              Text(respostas[perguntaEscolhida]),
               ElevatedButton(
-                onPressed: () {},
-                child: Text('ap1'),
+                onPressed: () {
+                  if (respostas[2] == respostas[perguntaEscolhida]) {
+                    ++placar;
+                  }
+                  _perguntasErespostas();
+                },
+                child: Text(perguntas[pergunta[0]]),
               ),
               ElevatedButton(
-                onPressed: () {},
-                child: Text(respostas[0]),
+                onPressed: () {
+                  _perguntasErespostas();
+                },
+                child: Text(perguntas[pergunta[1]]),
               ),
               ElevatedButton(
-                onPressed: () {},
-                child: Text('ap1'),
+                onPressed: () {
+                  if (respostas[0] == respostas[perguntaEscolhida]) {
+                    ++placar;
+                  }
+                  if (respostas[1] == respostas[perguntaEscolhida]) {
+                    ++placar;
+                  }
+                  _perguntasErespostas();
+                },
+                child: Text(perguntas[pergunta[2]]),
               ),
               ElevatedButton(
-                onPressed: () {},
-                child: Text('ap1'),
+                onPressed: () {
+                  if (respostas[3] == respostas[perguntaEscolhida]) {
+                    ++placar;
+                  }
+                  _perguntasErespostas();
+                },
+                child: Text(perguntas[pergunta[3]]),
               ),
+              ElevatedButton(
+                onPressed: () {
+                  _voltar();
+                },
+                child: Text('Voltar'),
+              ),
+              Text('Placar ${placar}')
             ],
           ),
         ),
