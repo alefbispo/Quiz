@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:quiz_flutter/model/perguntas.dart';
 import 'package:quiz_flutter/model/respostas.dart';
@@ -69,55 +71,64 @@ class _MyApp extends State<MyApp> {
             child: Text('Quiz do mozão'),
           ),
         ),
-        body: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(respostas[perguntaEscolhida]),
-              ElevatedButton(
-                onPressed: () {
-                  if (respostas[2] == respostas[perguntaEscolhida]) {
-                    ++placar;
-                  }
-                  _perguntasErespostas();
-                },
-                child: Text(perguntas[pergunta[0]]),
+        body: Container(
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.all(100),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    respostas[perguntaEscolhida],
+                    style: TextStyle(fontSize: 19),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      if (respostas[2] == respostas[perguntaEscolhida]) {
+                        ++placar;
+                      }
+                      _perguntasErespostas();
+                    },
+                    child: Text(perguntas[pergunta[0]]),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      _perguntasErespostas();
+                    },
+                    child: Text(perguntas[pergunta[1]]),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      if (respostas[0] == respostas[perguntaEscolhida]) {
+                        ++placar;
+                      }
+                      if (respostas[1] == respostas[perguntaEscolhida]) {
+                        ++placar;
+                      }
+                      _perguntasErespostas();
+                    },
+                    child: Text(perguntas[pergunta[2]]),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      if (respostas[3] == respostas[perguntaEscolhida]) {
+                        ++placar;
+                      }
+                      _perguntasErespostas();
+                    },
+                    child: Text(perguntas[pergunta[3]]),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      _voltar();
+                    },
+                    child: Text('Voltar'),
+                  ),
+                  Text('Placar ${placar}',
+                      style: TextStyle(fontSize: 30))
+                ],
               ),
-              ElevatedButton(
-                onPressed: () {
-                  _perguntasErespostas();
-                },
-                child: Text(perguntas[pergunta[1]]),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  if (respostas[0] == respostas[perguntaEscolhida]) {
-                    ++placar;
-                  }
-                  if (respostas[1] == respostas[perguntaEscolhida]) {
-                    ++placar;
-                  }
-                  _perguntasErespostas();
-                },
-                child: Text(perguntas[pergunta[2]]),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  if (respostas[3] == respostas[perguntaEscolhida]) {
-                    ++placar;
-                  }
-                  _perguntasErespostas();
-                },
-                child: Text(perguntas[pergunta[3]]),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  _voltar();
-                },
-                child: Text('Voltar'),
-              ),
-              Text('Placar ${placar}')
-            ],
+            ),
           ),
         ),
       ),
